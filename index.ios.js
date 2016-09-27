@@ -4,15 +4,10 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import React from 'react';
+import {AppRegistry,StyleSheet,Text,View} from 'react-native';
 
-class NativeRTC extends Component {
+class NativeRTC extends React.Component {
   render() {
     return (
       <View style={styles.container}>

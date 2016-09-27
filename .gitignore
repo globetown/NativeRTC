@@ -1,9 +1,11 @@
-# OSX
-#
+##########################
+######## OSX #############
+##########################
 .DS_Store
 
-# Xcode
-#
+##########################
+######## XCODE ###########
+##########################
 build/
 *.pbxuser
 !default.pbxuser
@@ -21,21 +23,25 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+ios/Bookee/AppDelegate.m
+ios/main.jsbundle
+ios/assets
 
-# Android/IJ
-#
-*.iml
-.idea
-.gradle
-local.properties
-
-# node.js
-#
+##########################
+######## NODE.JS #########
+##########################
+.babelrc
 node_modules/
 npm-debug.log
+dump.rdb
+.env
+release/
+coverage/
 
-# BUCK
-buck-out/
-\.buckd/
-android/app/libs
-android/keystores/debug.keystore
+##########################
+######## FASTLANE ########
+##########################
+*.zip
+fastlane/report.xml
+fastlane/certificates/distribution.p12
+fastlane/local_config.sh
