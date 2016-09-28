@@ -11,7 +11,7 @@ if(process.argv[2] === '--extract' || process.argv[2] === '-e'){
   ARCH_TYPES.forEach(elm => {
     exec(`lipo -extract ${elm} WebRTC -o WebRTC-${elm}`,{cwd:WEBRTC_BIN_PATH});
   });
-  exec('mv WebRTC WebRTC-all',{cwd:WEBRTC_BIN_PATH});
+  exec('cp WebRTC WebRTC-all',{cwd:WEBRTC_BIN_PATH});
   console.log(exec('ls -ahl | grep WebRTC-',{cwd:WEBRTC_BIN_PATH}).toString().trim());
   console.log('Done!');
 }
