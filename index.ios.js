@@ -16,6 +16,10 @@ import {
   getUserMedia
 } from 'react-native-webrtc';
 
+const signalingServer = 'heroku';
+const peerConnectionConfig = {'iceServers':[{'url':'stun:stun.l.google.com:19302'}]};
+const peerConnection = new RTCPeerConnection(peerConnectionConfig);
+
 class NativeRTC extends React.Component {
   state={videoURL:null};
   componentDidMount() {
@@ -55,7 +59,7 @@ const styles = StyleSheet.create({
     margin:10
   },
   selfView:{
-    width:200,
+    width:250,
     height:250,
     borderWidth:1
   }
