@@ -4,7 +4,6 @@ import React from 'react';
 import {AppRegistry,StyleSheet,Text,View,TouchableHighlight} from 'react-native';
 import WebRTC from 'react-native-webrtc';
 import genId from './utils.js';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const signalingServer = 'wss://webrtc-simple.herokuapp.com';
 const serverConnection = new WebSocket(signalingServer);
@@ -33,12 +32,6 @@ function start(isCaller) {
   if(isCaller) {
     peerConnection.createOffer(gotDescription,console.log);
   }
-}
-
-function close() {
-  peerConnection.close();
-  componentInstance.setState({remoteVideoUrl:null});
-  cforceUpdate
 }
 
 function gotDescription(description) {
@@ -98,15 +91,15 @@ class NativeRTC extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <WebRTC.RTCView streamURL={this.state.remoteVideoUrl} style={styles.bigVideo} objectFit={'cover'}>
-          { this.state.remoteVideoUrl
-            ? <WebRTC.RTCView streamURL={this.state.localVideoUrl} style={styles.smallVideo} objectFit={'cover'}/>
-            : <View/>
-          }
-          <TouchableHighlight onPress={this.state.remoteVideoUrl ? close : start.bind(this,true)} style={[styles.callButton, this.state.remoteVideoUrl && {backgroundColor:'red'}]}>
-            <Icon name='phone' size={40} color='white' style={this.state.remoteVideoUrl && {transform: [{rotate: '135deg'}]}}/>
-          </TouchableHighlight>
-        </WebRTC.RTCView>
+        <WebRTC.RTCView streamURL={this.state.localVideoUrl} style={styles.selfView}/>
+        <TouchableHighlight onPress={start.bind(this,true)}>
+          <Text>Start</Text>
+        </TouchableHighlight>
+        {
+          this.state.remoteVideoUrl
+          ? <WebRTC.RTCView streamURL={this.state.remoteVideoUrl} style={styles.selfView}/>
+          : null
+        }
       </View>
     );
   }
@@ -115,27 +108,15 @@ class NativeRTC extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex:1,
+    justifyContent:'center',
+    alignItems:'center',
     backgroundColor:'#F5FCFF'
   },
-  bigVideo:{
-    flex:1,
-    alignItems:'center',
-    justifyContent:'space-between',
+  selfView:{
+    margin:15,
+    width:250,
+    height:250,
     borderWidth:1
-  },
-  smallVideo:{
-    height:133,
-    width:75,
-    alignSelf:'flex-end'
-  },
-  callButton:{
-    height:80,
-    width:80,
-    borderRadius:40,
-    margin:40,
-    alignItems:'center',
-    justifyContent:'center',
-    backgroundColor:'green',
   }
 });
 
